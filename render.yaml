@@ -1,0 +1,26 @@
+services:
+  # 1. FastAPI Backend (with Selenium/Chrome)
+  - type: web
+    name: vtu-sync-backend
+    env: docker
+    dockerfilePath: ./api/Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite:///./syncapp.db
+      - key: CHROME_BIN
+        value: /usr/bin/google-chrome
+      - key: CHROMEDRIVER_PATH
+        value: /usr/bin/chromedriver
+
+  # 2. React Vite Frontend
+  - type: web
+    name: vtu-sync-frontend
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: vtu-sync-backend
+          envVarKey: RENDER_EXTERNAL_URL
