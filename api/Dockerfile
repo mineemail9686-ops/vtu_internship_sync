@@ -29,5 +29,5 @@ WORKDIR /app/api
 
 EXPOSE 8000
 
-# Start Uvicorn Server binding to Render's required PORT
-CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+# Start Uvicorn Server using script
+CMD ["./start.sh"]
