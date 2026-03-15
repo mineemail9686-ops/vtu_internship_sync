@@ -4,6 +4,7 @@ services:
     name: vtu-sync-backend
     env: docker
     dockerfilePath: ./api/Dockerfile
+    dockerContext: .
     envVars:
       - key: DATABASE_URL
         value: sqlite:///./syncapp.db
