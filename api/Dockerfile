@@ -17,7 +17,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 
 WORKDIR /app
 
-# Copy requirements from main directory
+# Copy requirements
 COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
